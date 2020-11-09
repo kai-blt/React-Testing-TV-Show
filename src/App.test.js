@@ -10,6 +10,7 @@ jest.mock('./api/fetchShow');
 
 describe('App Unit Tests', () => {
 
+    //Initial episode data
     const mockData = {
         data: {
             image: {
