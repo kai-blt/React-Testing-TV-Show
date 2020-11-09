@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import App from './App';
 
 //Setup mock API call by importing fetchShow as a mock
@@ -40,16 +41,25 @@ describe('App Unit Tests', () => {
 
         render(<App />);        
 
-        await waitFor(() => {
-            const selection = screen.queryByText(/select/i);
-            fireEvent.click(selection);
-            screen.debug()
+        await waitFor(() => {     
+            //Click on select season
+            const selection = screen.queryByText(/select/i);            
+            userEvent.click(selection);
+
+            //click on season 1
             const season = screen.queryByText(/season 1/i);
-            // screen.debug(season)
+            userEvent.click(season);
+
+            //Get all episodes by Test ID
+            const episodes = screen.queryAllByTestId('episode');
+            
+            //Checkout screen output of the episodes
+            screen.debug(episodes);
+
+            //Check that only 1 episode was in the DOM
+            expect(episodes).toHaveLength(1);
         })
     });
 
 
 });
-
-

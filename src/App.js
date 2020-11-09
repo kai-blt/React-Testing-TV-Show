@@ -41,7 +41,6 @@ export default function App() {
         onChange={handleSelect}
         value={selectedSeason || "Select a season"}
         placeholder="Select an option"
-        data-testid="dropdown"
       />
       <Episodes episodes={episodes} />
     </div>
