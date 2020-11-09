@@ -38,15 +38,17 @@ describe('App Unit Tests', () => {
     test('Can fetch and render data', async () => {
         mockFetchShow.mockResolvedValueOnce(mockData);
 
-        render(<App />);
-
-        const selection = screen.queryByTestId('dropdown');
-        console.log(selection)
+        render(<App />);        
 
         await waitFor(() => {
-            //
+            const selection = screen.queryByText(/select/i);
+            fireEvent.click(selection);
+            screen.debug()
+            const season = screen.queryByText(/season 1/i);
+            // screen.debug(season)
         })
     });
+
 
 });
 
